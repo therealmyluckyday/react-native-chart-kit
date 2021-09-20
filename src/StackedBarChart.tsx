@@ -71,7 +71,7 @@ class StackedBarChart extends AbstractChart<
   };
 
   getBarRadius = (ret: string | any[], x: string | any[]) => {
-    return this.props.chartConfig.barRadius && ret.length === x.length - 1
+    return this.props.chartConfig.barRadius
       ? this.props.chartConfig.barRadius
       : 0;
   };
@@ -101,7 +101,7 @@ class StackedBarChart extends AbstractChart<
   }) =>
     data.map((x, i) => {
       const barWidth = 32 * this.getBarPercentage();
-      const ret = [];
+      let ret = [];
       let h = 0;
       let st = paddingTop;
 
@@ -120,8 +120,7 @@ class StackedBarChart extends AbstractChart<
             barWidth / 2) *
           fac;
 
-        ret.push(
-          <Rect
+          ret = [<Rect
             onPress={()=>this?.props?.onBarPress({value:x,index:i})}
             key={Math.random()}
             x={xC}
@@ -129,10 +128,9 @@ class StackedBarChart extends AbstractChart<
             rx={this.getBarRadius(ret, x)}
             ry={this.getBarRadius(ret, x)}
             width={barWidth}
-            height={h}
+            height={h + (h > 0 ? 10 : 0)}
             fill={colors[z]}
-          />
-        );
+          />, ...ret]
 
         if (!this.props.hideLegend) {
           ret.push(
