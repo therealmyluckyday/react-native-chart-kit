@@ -918,7 +918,7 @@ class LineChart extends AbstractChart<LineChartProps, LineChartState> {
                   formatXLabel
                 })}
             </G>
-            <G>
+            <G onPress={this.props.onPress && this.props.onPress}>
               {this.renderLine({
                 ...config,
                 ...chartConfig,
