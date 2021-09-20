@@ -122,6 +122,7 @@ class StackedBarChart extends AbstractChart<
 
         ret.push(
           <Rect
+            onPress={()=>_this.props.onBarPress({value:x,index:i})}
             key={Math.random()}
             x={xC}
             y={y}
